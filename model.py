@@ -10,11 +10,15 @@ class Memo:
         self.body = body
         self.date_of_change = date_of_change
 
+    def get_id(self) -> int:
+        return (int)(self.id)
+
     def memo_to_str(self):
         return f'{self.id};{self.date_of_change};{self.name};{self.body}'.strip()
 
     def __str__(self):
-        return f'{self.id:<2}{self.date_of_change:<11}{self.name:<20}'
+        return f'ID:{self.id:}\nДата:{self.date_of_change:}\nНазвание:{self.name:}\n' \
+               f'{self.body}'
 
 class Store:
     def __init__(self, path: str):

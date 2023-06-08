@@ -21,10 +21,14 @@ def start():
             case 3:
                 notes.add(view.create_new_note(notes))
             case 4:
-                break
+                view.show_me_all_notes(notes)
+                view.edit_note(notes)
             case 5:
                 notes.save()
             case 6:
-                break
+                notes.remove(view.remove_note())
+                print('Заметка удалена.')
             case 7:
+                if view.save_before_exit():
+                    notes.save()
                 exit(0)

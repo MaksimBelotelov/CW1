@@ -53,4 +53,8 @@ class Store:
     def add(self, new_note: Memo):
         self.memo_store.append(new_note)
 
-
+    def remove(self, id: int):
+        for item in self.memo_store:
+            if item.get_id() == id:
+                self.memo_store.remove(item)
+                return

@@ -1,4 +1,5 @@
 from model import Memo, Store
+from datetime import date
 
 
 def main_menu() -> int:
@@ -16,7 +17,7 @@ def main_menu() -> int:
 --------------------------------''')
         ch = input()
         if ch.isdigit() and 0 < int(ch) < 8:
-            ch = (int)(ch)
+            ch = int(ch)
             return ch
         else:
             print('Необходимо ввести цифру от 1 до 7')
@@ -25,7 +26,7 @@ def main_menu() -> int:
 def show_me_all_notes(store: Store):
     if store.get_memo_store():
         for item in store.get_memo_store():
-            print(f'{item.id:<2}{item.date_of_change:<11}{item.name:<20}')
+            print(f'{item.id:<2}{item.date_of_change} {item.name:<20}')
     else:
         print('Список заметок пуст.')
 
@@ -33,7 +34,22 @@ def show_me_all_notes(store: Store):
 def show_me_this_note(id: int, store: Store):
     if store.get_memo_store():
         for item in store.get_memo_store():
-            if(item.get_id() == id):
+            if item.get_id() == id:
                 print(item)
                 return
     print('В списке нет заметки с таким номером.')
+
+
+def create_new_note(store: Store) -> Memo:
+    name = input('Введите название для заметки: ')
+    print('Введите заметку. Для окончания введите пустую строку.')
+    body = ""
+    while True:
+        s = input()
+        if s:
+            body += s + '\n'
+        else:
+            break
+    Memo.id_counter = int(Memo.id_counter) + 1
+
+    return Memo(Memo.id_counter, date.today(), name, body)

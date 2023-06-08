@@ -19,12 +19,12 @@ def start():
                 else:
                     print('Необходимо ввести Id записи')
             case 3:
-                break
+                notes.add(view.create_new_note(notes))
             case 4:
                 break
             case 5:
-                break
-            case 6:
                 notes.save()
+            case 6:
+                break
             case 7:
                 exit(0)

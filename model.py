@@ -1,6 +1,7 @@
 import csv
 from datetime import date
 
+
 class Memo:
     id_counter = 0
 
@@ -17,7 +18,8 @@ class Memo:
         return f'{self.id};{self.date_of_change};{self.name};{self.body}'.strip()
 
     def __str__(self):
-        return f'ID:{self.id:}\nДата:{self.date_of_change:}\nНазвание:{self.name:}\n' \
+        return f'----------------------------------------------------------\n' \
+               f'ID:{self.id:}\nДата:{self.date_of_change:}\nНазвание:{self.name:}\n' \
                f'{self.body}'
 
 class Store:
@@ -35,6 +37,8 @@ class Store:
                 reader = csv.DictReader(csvfile, delimiter=';')
                 for row in reader:
                     self.memo_store.append(Memo(row['Id'], row['Date'], row['Name'], row['Body']))
+                if self.memo_store:
+                    Memo.id_counter = self.memo_store[-1].id
         except FileNotFoundError:
             print('Ошибка! Файл с данными не найден!')
 
@@ -45,3 +49,8 @@ class Store:
                 writer.writeheader()
                 for row in self.memo_store:
                     writer.writerow({'Id': row.id, 'Date': row.date_of_change, 'Name': row.name, 'Body': row.body})
+
+    def add(self, new_note: Memo):
+        self.memo_store.append(new_note)
+
+

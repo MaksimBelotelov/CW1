@@ -11,7 +11,7 @@ class Memo:
         self.date_of_change = date_of_change
 
     def memo_to_str(self):
-        return f'{self.id};{self.date_of_change};{self.name};{self.body}'
+        return f'{self.id};{self.date_of_change};{self.name};{self.body}'.strip()
 
     def __str__(self):
         return f'{self.id:<2}{self.date_of_change:<11}{self.name:<20}'
@@ -34,3 +34,10 @@ class Store:
         except FileNotFoundError:
             print('Ошибка! Файл с данными не найден!')
 
+    def save(self):
+            with open(self.path, "w", encoding = 'UTF-8') as csvfile:
+                fieldnames = ['Id', 'Date', 'Name', 'Body']
+                writer = csv.DictWriter(csvfile, delimiter= ';', fieldnames=fieldnames)
+                writer.writeheader()
+                for row in self.memo_store:
+                    writer.writerow({'Id': row.id, 'Date': row.date_of_change, 'Name': row.name, 'Body': row.body})

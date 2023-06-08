@@ -12,6 +12,7 @@ def start():
             case 1:
                 view.show_me_all_notes(notes)
             case 2:
+
                 break
             case 3:
                 break
@@ -20,6 +21,6 @@ def start():
             case 5:
                 break
             case 6:
-                break
+                notes.save()
             case 7:
                 exit(0)

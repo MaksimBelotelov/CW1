@@ -1,3 +1,5 @@
+from model import Memo, Store
+
 def main_menu() -> int:
     ch = ''
     while True:
@@ -17,3 +19,10 @@ def main_menu() -> int:
             return ch
         else:
             print('Необходимо ввести цифру от 1 до 7')
+
+def show_me_all_notes(store: Store):
+    if store.get_memo_store():
+        for item in store.get_memo_store():
+            print(item)
+    else:
+        print('Список заметок пуст.')
